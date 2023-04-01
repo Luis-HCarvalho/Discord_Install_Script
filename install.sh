@@ -37,5 +37,17 @@ else
 	install;
 fi
 
+# if present, prompt the user if discord post install script should be run
+if [[ -a /opt/Discord/postinst.sh ]]; then
+	cat /opt/Discord/postinst.sh;
+
+	printf "run postinst.sh? [Y/n] "
+	read RESPONSE;
+
+	if [[ $RESPONSE == "y" ]]; then
+		bash /opt/Discord/postinst.sh;
+	fi
+fi
+
 exit 0;
 
