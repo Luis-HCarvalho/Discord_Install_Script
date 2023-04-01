@@ -9,7 +9,7 @@ PARAM1=$1;
 install () {
 	sudo tar -xvzf $PARAM1 -C /opt;
 	sudo ln -sf /opt/Discord/Discord /usr/bin/discord;
-	sudo cp -r /opt/Discord/discord.desktop /usr/share/applications;
+	sudo cp --remove-destination /opt/Discord/discord.desktop /usr/share/applications;
 
 	printf "Remove ${PARAM1}? [Y/n] ";
 	read RESPONSE;
