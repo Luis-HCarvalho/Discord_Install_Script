@@ -6,6 +6,7 @@ NOCOLOR='\033[0m';
 
 PARAM1=$1;
 
+
 install () {
 	sudo tar -xvzf $PARAM1 -C /opt;
 	sudo ln -sf /opt/Discord/Discord /usr/bin/discord;
@@ -30,12 +31,12 @@ if [[ -a /usr/bin/discord ]]; then
 	printf "Proceed anyway? [Y/n] ";
 	read RESPONSE;
 
-	if [[ $RESPONSE == "y" ]]; then
-		install;
+	if [[ $RESPONSE != "y" ]]; then
+		exit 1;
 	fi
-else
-	install;
 fi
+
+install;
 
 # if present, prompt the user if discord post install script should be run
 if [[ -a /opt/Discord/postinst.sh ]]; then
