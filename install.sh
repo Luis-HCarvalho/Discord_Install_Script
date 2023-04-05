@@ -46,7 +46,7 @@ if [[ -a /opt/Discord/postinst.sh ]]; then
 	read RESPONSE;
 
 	if [[ $RESPONSE == "y" ]]; then
-		bash /opt/Discord/postinst.sh;
+		. /opt/Discord/postinst.sh;
 	fi
 fi
 
