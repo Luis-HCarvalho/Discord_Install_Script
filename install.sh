@@ -4,9 +4,6 @@
 YELLOW='\033[1;33m';
 NOCOLOR='\033[0m';
 
-PARAM1=$1;
-
-
 # download discord tarball 
 wget "https://discord.com/api/download?platform=linux&format=tar.gz" -O discord.tar.gz;
 
@@ -14,25 +11,6 @@ if [[ $? != 0 ]]; then
     prinf "${YELLOW}Download Failed${NOCOLOR}\n"
     exit 1;
 fi 
-
-install () {
-	sudo tar -xvzf $PARAM1 -C /opt;
-	sudo ln -sf /opt/Discord/Discord /usr/bin/discord;
-	sudo cp --remove-destination /opt/Discord/discord.desktop /usr/share/applications;
-
-	printf "Remove ${PARAM1}? [Y/n] ";
-	read RESPONSE;
-
-	if [[ $RESPONSE == "y" ]]; then
-		rm $PARAM1;
-	fi
-}
-
-if ! [[ $PARAM1  ]]; then
-	exit 1;
-else
-	echo "$PARAM1";
-fi
 
 if [[ -a /usr/bin/discord ]]; then
 	printf  "${YELLOW}WARNING: Discord already installed${NOCOLOR}\n";
@@ -44,11 +22,15 @@ if [[ -a /usr/bin/discord ]]; then
 	fi
 fi
 
-install;
+sudo tar -xvzf discord.tar.gz -C /opt;
+sudo ln -sf /opt/Discord/Discord /usr/bin/discord;
+sudo cp --remove-destination /opt/Discord/discord.desktop /usr/share/applications;
+
+rm discord.tar.gz
 
 # if present, prompt the user if discord post install script should be run
 if [[ -a /opt/Discord/postinst.sh ]]; then
-	cat /opt/Discord/postinst.sh;
+	less /opt/Discord/postinst.sh;
 
 	printf "run postinst.sh? [Y/n] "
 	read RESPONSE;
