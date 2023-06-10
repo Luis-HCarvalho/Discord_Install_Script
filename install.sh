@@ -7,6 +7,14 @@ NOCOLOR='\033[0m';
 PARAM1=$1;
 
 
+# download discord tarball 
+wget "https://discord.com/api/download?platform=linux&format=tar.gz" -O discord.tar.gz;
+
+if [[ $? != 0 ]]; then
+    prinf "${YELLOW}Download Failed${NOCOLOR}\n"
+    exit 1;
+fi 
+
 install () {
 	sudo tar -xvzf $PARAM1 -C /opt;
 	sudo ln -sf /opt/Discord/Discord /usr/bin/discord;
