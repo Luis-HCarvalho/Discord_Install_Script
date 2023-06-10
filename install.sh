@@ -22,6 +22,7 @@ if [[ -a /usr/bin/discord ]]; then
 	fi
 fi
 
+# installation
 sudo tar -xvzf discord.tar.gz -C /opt;
 sudo ln -sf /opt/Discord/Discord /usr/bin/discord;
 sudo cp --remove-destination /opt/Discord/discord.desktop /usr/share/applications;
