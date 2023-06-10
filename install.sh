@@ -26,6 +26,9 @@ sudo tar -xvzf discord.tar.gz -C /opt;
 sudo ln -sf /opt/Discord/Discord /usr/bin/discord;
 sudo cp --remove-destination /opt/Discord/discord.desktop /usr/share/applications;
 
+sudo sed -i "s+Exec*+Exec=/usr/bin/discord\n+" /usr/share/applications/discord.desktop;
+sudo sed -i "s/Icon*/Icon=\/opt\/Discord\/discord.png/\n" /usr/share/applications/discord.desktop;
+
 rm discord.tar.gz
 
 # if present, prompt the user if discord post install script should be run
